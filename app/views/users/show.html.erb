@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <a class="navbar-brand" href="#">GrouUp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               <li class="nav-item">
+                  <a class="nav-link" href='/events'>Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href='/logout' data-method="delete">Log out</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="container">
+         <h1><%= @user.name.titleize %>'s Profile</h1>
+
+         <p>Email: <%= @user.email %></p>
+         <p>Location: <%= @user.location.city.titleize %>, <%= @user.location.state %></p>
+      </div>
+   </body>
+</html>

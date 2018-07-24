@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
    belongs_to :location, required: true
    has_many :events, dependent: :destroy
    has_many :groupups, dependent: :destroy
-   has_many :joined_events, through: :meetups, source: :event
+   has_many :joined_events, through: :groupups, source: :event
 
    has_secure_password
 
