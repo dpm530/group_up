@@ -1,0 +1,2 @@
+class GroupupsController < ApplicationController
+end

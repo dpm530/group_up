@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <a class="navbar-brand" href="#">GrouUp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               <li class="nav-item">
+                  <a class="nav-link" href='/events/new'>Create Event</a>
+               </li>
+               <% if current_user %>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/users/<%= current_user.id %>/edit">Edit Profile</a>
+                  </li>
+               <% end %>
+               <li class="nav-item">
+                  <a class="nav-link" href='/logout' data-method="delete">Log out</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+
+      <div class="container">
+         <h1>Welcome, <%= current_user.name.titleize %></h1>
+      </div>
+      <div class="container">
+         <div class="row">
+            <div class="col-2">
+               <ul class="nav flex-column">
+                  <li class="nav-item">
+                     <a class="nav-link active" data-toggle="pill" href="#allGroupUps">All GroupUps</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" data-toggle="pill" href="#myGroupUps">My GroupUps</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" data-toggle="pill" href="#going">I'm going</a>
+                  </li>
+               </ul>
+            </div>
+            <div class="col-10">
+               <div class="tab-content">
+                  <div class="tab-pane container active" id="allGroupUps">
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th>Name</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Location</th>
+                              <th>Host</th>
+                              <th>Status</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <% @groupups.each do |groupup| %>
+                                 <td><a href='/events/<%= groupup.id %>'><%= groupup.name %></a></td>
+                                 <td><%= groupup.date %></td>
+                                 <td><%= groupup.time %></td>
+                                 <td><%= groupup.location.city %>, <%= groupup.location.state %></td>
+                                 <td><a href="/users/<%= groupup.user.id %>"><%= groupup.user.name.titleize %></td>
+                                 <td>
+                                    <% if groupup.user==current_user %>
+                                       <a href="/events/<%= groupup.id %>/edit">Edit</a>
+                                       <a href="/events/<%= groupup.id %>" data-method='delete'>Delete</a>
+                                    <% else %>
+                                       <% unless groupup.users.include? current_user %>
+                                          <form action="/events/<%= groupup.id %>/user" method="post">
+                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+                                             <button class='btn btn-primary' type='submit'>Join</button>
+                                          </form>
+                                       <% else %>
+                                          <form action='/events/<%= groupup.id %>/user' method='post'>
+                                             <input type='hidden' name='_method' value='delete'>
+                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+                                             <button class='btn btn-danger'>Cancel</button>
+                                          </form>
+                                       <% end %>
+                                    <% end %>
+                                 </td>
+                              <% end %>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="tab-pane container fade" id="myGroupUps">...</div>
+                  <div class="tab-pane container fade" id="going">...</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <a class="navbar-brand" href="#">GrouUp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               <li class="nav-item">
+                  <a class="nav-link" href='/events'>Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href='/logout' data-method="delete">Log out</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="container">
+         <h1><%= @event.name %></h1>
+         <hr>
+         <p>Host: <%= @event.user.name.titleize %></p>
+         <p>Date: <%= @event.date %></p>
+         <p>Time: <%= @event.time %></p>
+         <p>Description:</p>
+         <p><%= @event.description %></p>
+         <p>Location: <%= @event.location.city.titleize %> <%= @event.location.state.titleize %></p>
+         <p>Poeple Joining the Event: <%= @event.users.count %></p>
+
+         <!-- Poeple who joined the event -->
+         <% unless @event.users.empty? %>
+            <table class='table'>
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>City</th>
+                     <th>State</th>
+                  </tr>
+               </thead>
+               <tbody>
+                     <% @event.users.each do |user| %>
+                        <tr>
+                           <td><%= user.name.titleize %></td>
+                           <td><%= user.location.city.titleize %></td>
+                           <td><%= user.location.state.titleize %></td>
+                        </tr>
+                     <% end %>
+               </tbody>
+            </table>
+         <% else %>
+            <h4>No one joined your event.</h4>
+         <% end %>
+         <!-- end of poeple who joined the event -->
+
+      </div>
+   </body>
+</html>
