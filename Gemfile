@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
@@ -7,7 +8,7 @@ gem 'rails', '4.2.7'
 gem 'pg', '~> 0.15'
 gem 'bcrypt', '~> 3.1.7'
 # Use SCSS for stylesheets
-
+gem 'puma'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
