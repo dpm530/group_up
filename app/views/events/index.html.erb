@@ -6,7 +6,7 @@
    </head>
    <body>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <a class="navbar-brand" href="#">GrouUp</a>
+         <a class="navbar-brand" href="#">GroupUp</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
          </button>
@@ -26,12 +26,17 @@
             </ul>
          </div>
       </nav>
+      <div class="jumbotron jumbotron-fluid">
+         <div id="jumbotronText"  class="container text-center">
+            <h1>Find Groupup</h1>
+            <p> <%= @groupups.length %>  Groupups nearby</p>
+         </div>
+      </div><br>
+
 
       <div class="container">
-         <h1>Welcome, <%= current_user.name.titleize %></h1>
-      </div>
-      <div class="container">
          <div class="row">
+            <div class="col-1"></div>
             <div class="col-2">
                <ul class="nav flex-column">
                   <li class="nav-item">
@@ -45,10 +50,28 @@
                   </li>
                </ul>
             </div>
-            <div class="col-10">
+            <div class="col-8">
                <div class="tab-content">
                   <div class="tab-pane container active" id="allGroupUps">
-                     <table class="table">
+                     <% @groupups.each do |groupup| %>
+                        <div id="events" class="container text-center">
+                           <h3><a href="/events/<%= groupup.id %>"><%= groupup.name %></a></h3>
+                           <% unless groupup.users.include? current_user %>
+                              <form action="/events/<%= groupup.id %>/user" method="post">
+                                 <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+                                 <button class='btn btn-primary' type='submit'>Join</button>
+                              </form>
+                           <% else %>
+                              <form action='/events/<%= groupup.id %>/user' method='post'>
+                                 <input type='hidden' name='_method' value='delete'>
+                                 <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+                                 <button class='btn btn-danger'>Leave</button>
+                              </form>
+                           <% end %>
+                        </div>
+                     <% end %>
+
+                     <!-- <table class="table">
                         <thead>
                            <tr>
                               <th>Name</th>
@@ -89,12 +112,13 @@
                               <% end %>
                            </tr>
                         </tbody>
-                     </table>
+                     </table> -->
                   </div>
                   <div class="tab-pane container fade" id="myGroupUps">...</div>
                   <div class="tab-pane container fade" id="going">...</div>
                </div>
             </div>
+            <div class="col-1"></div>
          </div>
       </div>
    </body>

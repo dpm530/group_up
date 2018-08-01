@@ -18,6 +18,23 @@
 #indexDescription div h3{
    color: white;
 }
+#login{
+   border: 1px solid #dcdcdc;
+   padding: 20px;
+}
+#signup{
+   border: 1px solid #dcdcdc;
+   padding: 20px;
+}
+div.jumbotron{
+   background-color: #f64060;
+}
+#jumbotronText{
+   color: white;   
+}
+#events{
+   border: 1px solid black;
+}
 footer{
    padding-top: 20px;
    padding-bottom: 20px;
