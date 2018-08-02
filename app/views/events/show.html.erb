@@ -23,6 +23,10 @@
       </nav>
       <div class="container">
          <h1><%= @event.name %></h1>
+         <% if @event.user==current_user %>
+            <a href="/events/<%= @event.id %>/edit">Edit</a>
+            <a href="/events/<%= @event.id %>" data-method='delete'>Delete</a>
+         <% end %>
          <hr>
          <p>Host: <%= @event.user.name.titleize %></p>
          <p>Date: <%= @event.date %></p>
@@ -31,32 +35,24 @@
          <p><%= @event.description %></p>
          <p>Location: <%= @event.location.city.titleize %> <%= @event.location.state.titleize %></p>
          <p>Poeple Joining the Event: <%= @event.users.count %></p>
-
-         <!-- Poeple who joined the event -->
-         <% unless @event.users.empty? %>
-            <table class='table'>
-               <thead>
-                  <tr>
-                     <th>Name</th>
-                     <th>City</th>
-                     <th>State</th>
-                  </tr>
-               </thead>
-               <tbody>
-                     <% @event.users.each do |user| %>
-                        <tr>
-                           <td><%= user.name.titleize %></td>
-                           <td><%= user.location.city.titleize %></td>
-                           <td><%= user.location.state.titleize %></td>
-                        </tr>
-                     <% end %>
-               </tbody>
-            </table>
-         <% else %>
-            <h4>No one joined your event.</h4>
+         <hr>
+         <h1>Comments:</h1>
+         <% @comments.each do |comment| %>
+            <p> <%= comment.content %> </p>
          <% end %>
-         <!-- end of poeple who joined the event -->
 
+      </div>
+      <div class="container">
+         <form action="/comments/<%= @event.id %>/user" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+            <div class="form-group">
+               <label for="content">Comments:</label>
+               <textarea name="comment[content]" rows="8" cols="80" id="content" class="form-control"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Comment</button>
+         </form>
       </div>
    </body>
 </html>

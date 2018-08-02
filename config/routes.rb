@@ -8,6 +8,8 @@ Rails.application.routes.draw do
    post 'events/:id/user' => 'groupups#create'
    delete 'events/:id/user' => 'groupups#destroy'
 
+   post 'comments/:id/user' => 'comments#create'
+
    post 'login' => 'sessions#create'
    delete 'logout' => 'sessions#destroy'
 

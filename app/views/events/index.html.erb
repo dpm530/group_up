@@ -82,51 +82,9 @@
                                  <% end %>
                               </div>
                            </div>
-                        </div>
+                        </div><br>
                      <% end %>
 
-                     <!-- <table class="table">
-                        <thead>
-                           <tr>
-                              <th>Name</th>
-                              <th>Date</th>
-                              <th>Time</th>
-                              <th>Location</th>
-                              <th>Host</th>
-                              <th>Status</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <tr>
-                              <% @groupups.each do |groupup| %>
-                                 <td><a href='/events/<%= groupup.id %>'><%= groupup.name %></a></td>
-                                 <td><%= groupup.date %></td>
-                                 <td><%= groupup.time %></td>
-                                 <td><%= groupup.location.city %>, <%= groupup.location.state %></td>
-                                 <td><a href="/users/<%= groupup.user.id %>"><%= groupup.user.name.titleize %></td>
-                                 <td>
-                                    <% if groupup.user==current_user %>
-                                       <a href="/events/<%= groupup.id %>/edit">Edit</a>
-                                       <a href="/events/<%= groupup.id %>" data-method='delete'>Delete</a>
-                                    <% else %>
-                                       <% unless groupup.users.include? current_user %>
-                                          <form action="/events/<%= groupup.id %>/user" method="post">
-                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-                                             <button class='btn btn-primary' type='submit'>Join</button>
-                                          </form>
-                                       <% else %>
-                                          <form action='/events/<%= groupup.id %>/user' method='post'>
-                                             <input type='hidden' name='_method' value='delete'>
-                                             <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-                                             <button class='btn btn-danger'>Cancel</button>
-                                          </form>
-                                       <% end %>
-                                    <% end %>
-                                 </td>
-                              <% end %>
-                           </tr>
-                        </tbody>
-                     </table> -->
                   </div>
                   <div class="tab-pane container fade" id="myGroupUps">...</div>
                   <div class="tab-pane container fade" id="going">...</div>

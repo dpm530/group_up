@@ -30,6 +30,7 @@ class EventsController < ApplicationController
 
    def show
       @event=Event.find(params[:id])
+      @comments=Comment.where(event:@event)
    end
 
    def edit
