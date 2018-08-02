@@ -55,19 +55,33 @@
                   <div class="tab-pane container active" id="allGroupUps">
                      <% @groupups.each do |groupup| %>
                         <div id="events" class="container text-center">
-                           <h3><a href="/events/<%= groupup.id %>"><%= groupup.name %></a></h3>
-                           <% unless groupup.users.include? current_user %>
-                              <form action="/events/<%= groupup.id %>/user" method="post">
-                                 <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-                                 <button class='btn btn-primary' type='submit'>Join</button>
-                              </form>
-                           <% else %>
-                              <form action='/events/<%= groupup.id %>/user' method='post'>
-                                 <input type='hidden' name='_method' value='delete'>
-                                 <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
-                                 <button class='btn btn-danger'>Leave</button>
-                              </form>
-                           <% end %>
+                           <div class="row">
+                              <div class="col-4">
+                                 <h5><%= groupup.date %></h5>
+                              </div>
+                              <div class="col-6">
+                                 <h3><a href="/events/<%= groupup.id %>"><%= groupup.name %></a></h3>
+                              </div>
+                              <div class="col-2">
+                                 <% if groupup.user==current_user %>
+                                    <a href="/events/<%= groupup.id %>/edit">Edit</a>
+                                    <a href="/events/<%= groupup.id %>" data-method='delete'>Delete</a>
+                                 <% else %>
+                                    <% unless groupup.users.include? current_user %>
+                                       <form action="/events/<%= groupup.id %>/user" method="post">
+                                          <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+                                          <button class='btn btn-primary' type='submit'>Join</button>
+                                       </form>
+                                    <% else %>
+                                       <form action='/events/<%= groupup.id %>/user' method='post'>
+                                          <input type='hidden' name='_method' value='delete'>
+                                          <input type='hidden' name='authenticity_token' value="<%= form_authenticity_token %>">
+                                          <button class='btn btn-danger'>Cancel</button>
+                                       </form>
+                                    <% end %>
+                                 <% end %>
+                              </div>
+                           </div>
                         </div>
                      <% end %>
 
@@ -120,6 +134,42 @@
             </div>
             <div class="col-1"></div>
          </div>
-      </div>
+      </div><br><br>
+
+      <footer class="container-fluid" style="background-color: #353e48;">
+         <div class="row">
+            <div class="col-1"></div>
+            <div class="col-3">
+               <h3>Start a new event</h3>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-1"></div>
+            <div class="col-2">
+               <p><bold>Your Account</bold></p>
+               <p><a href="/users/new"> Sign up</a></p>
+               <p><a href="/users/new">Log in</a></p>
+               <p><a href="">Help</a></p>
+            </div>
+            <div class="col-2">
+               <p><bold>Discover</bold></p>
+               <p><a href="">Groups</a></p>
+               <p><a href="">Topics</a></p>
+               <p><a href="">Cities</a></p>
+            </div>
+            <div class="col-2">
+               <p><bold>GroupUp</bold></p>
+               <p><a href="">About</a></p>
+               <p><a href="">GroupUp Pro</a></p>
+               <p><a href="">Apps</a></p>
+            </div>
+            <div class="col-4">
+               <p>&copy; GroupUp 2018</p>
+               <a href="">Terms of Service |</a> <a href=""> Privacy Policy |</a> <a href=""> Cookie Policy</a>
+            </div>
+            <div class="col-1"></div>
+         </div>
+      </footer>
    </body>
 </html>

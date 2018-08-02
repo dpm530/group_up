@@ -20,13 +20,13 @@
                </li>
             </ul>
          </div>
-      </nav>
+      </nav><br>
 
       <!-- Event Form  -->
       <div class="container">
          <div class="row">
             <div class="col-3"></div>
-            <div class="col-6">
+            <div id="form" class="col-6">
                <h2>Start a new Group</h2>
                <form action="/events" method="post">
                   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
@@ -64,7 +64,43 @@
             <div class="col-3"></div>
          </div>
          <div class="row"></div>
-      </div>
+      </div><br>
       <!-- End Event Form -->
+
+      <footer class="container-fluid" style="background-color: #353e48;">
+         <div class="row">
+            <div class="col-1"></div>
+            <div class="col-3">
+               <h3>Start a new event</h3>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-1"></div>
+            <div class="col-2">
+               <p><bold>Your Account</bold></p>
+               <p><a href="/users/new"> Sign up</a></p>
+               <p><a href="/users/new">Log in</a></p>
+               <p><a href="">Help</a></p>
+            </div>
+            <div class="col-2">
+               <p><bold>Discover</bold></p>
+               <p><a href="">Groups</a></p>
+               <p><a href="">Topics</a></p>
+               <p><a href="">Cities</a></p>
+            </div>
+            <div class="col-2">
+               <p><bold>GroupUp</bold></p>
+               <p><a href="">About</a></p>
+               <p><a href="">GroupUp Pro</a></p>
+               <p><a href="">Apps</a></p>
+            </div>
+            <div class="col-4">
+               <p>&copy; GroupUp 2018</p>
+               <a href="">Terms of Service |</a> <a href=""> Privacy Policy |</a> <a href=""> Cookie Policy</a>
+            </div>
+            <div class="col-1"></div>
+         </div>
+      </footer>
    </body>
 </html>

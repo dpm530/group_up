@@ -6,7 +6,7 @@
    </head>
    <body>
       <!-- Event Form  -->
-      <div class="col-5">
+      <div id="form" class="col-5">
          <h2>Edit Event</h2>
          <form action="/events/<%= @event.id %>" method="post">
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />

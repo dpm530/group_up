@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
    resources :users
    resources :events
+   post 'events/:id/user' => 'groupups#create'
+   delete 'events/:id/user' => 'groupups#destroy'
 
    post 'login' => 'sessions#create'
    delete 'logout' => 'sessions#destroy'
