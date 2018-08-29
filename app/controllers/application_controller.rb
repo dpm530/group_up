@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
 
    def index
+      @groupups=Event.all
    end
 
    def current_user

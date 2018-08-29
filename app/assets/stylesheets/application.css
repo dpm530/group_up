@@ -42,6 +42,7 @@ div.jumbotron{
 }
 #events{
    border: 1px solid black;
+   padding: 10px;
 }
 footer{
    padding-top: 20px;

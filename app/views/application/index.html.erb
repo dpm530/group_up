@@ -25,6 +25,27 @@
       <div id="indexImage" class="container-fluid">
 
       </div><br>
+
+      <div class="container">
+         <div class="row">
+            <div class="">
+               <h4>Populat Meetups nearby</h4>
+            </div>
+            <% @groupups.each do |groupup| %>
+               <div id="events" class="container text-center">
+                  <div class="row">
+                     <div class="col-4">
+                        <h5><%= groupup.date %></h5>
+                     </div>
+                     <div class="col-6">
+                        <h3><a href="/events/<%= groupup.id %>"><%= groupup.name %></a></h3>
+                     </div>
+                  </div>
+               </div><br>
+            <% end %>
+         </div>
+      </div>
+
       <div class="container"><br>
          <div class="row">
             <div class="col-3">
